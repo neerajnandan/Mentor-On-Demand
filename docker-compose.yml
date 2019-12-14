@@ -1,0 +1,99 @@
+version: '3'
+services:
+  mentor_on_demand-mysql:
+    image: mysql:8.0.18
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - d:/mentor_on_demanddb:/var/lib/mentor_on_demand
+      - ./dbscripts:/docker-entrypoint-initdb.d
+
+  eureka-discovery-server:
+    image: eureka-discovery-app
+    build: micro-services/eureka-discovery-server/.
+    ports:
+      - 9999:9999
+
+  search-microservice:
+    image: search-microservice-app
+    build: micro-services/search-microservice/.
+    ports:
+      - 9994:9994
+    depends_on:
+      - mentor_on_demand
+      - eureka-discovery-server
+    links:
+      - mentor_on_demand
+      - eureka-discovery-server
+
+  skill_microservice:
+    image: skill-microservice-app
+    build: micro-services/skill-microservice/.
+    ports:
+      - 9995:9995
+    depends_on:
+      - mentor_on_demand
+      - eureka-discovery-server
+    links:
+      - mentor_on_demand
+      - eureka-discovery-server
+
+
+  training-microservice:
+    image: training-microservice-app
+    build: micro-services/training-microservice/.
+    ports:
+      - 9993:9993
+    depends_on:
+      - mentor_on_demand
+      - eureka-discovery-server
+    links:
+      - mentor_on_demand
+      - eureka-discovery-server
+
+  userLogin-microservice:
+    image: userLogin-microservice-app
+    build: micro-services/userLogin-microservice/.
+    ports:
+      - 9996:9996
+    depends_on:
+      - mentor_on_demand
+      - eureka-discovery-server
+    links:
+      - mentor_on_demand
+      - eureka-discovery-server
+
+  user-Microservice:
+    image: user-Microservice-app
+    build: micro-services/user-Microservice/.
+    ports:
+      - 9992:9992
+    depends_on:
+      - mentor_on_demand
+      - eureka-discovery-server
+    links:
+      - mentor_on_demand
+      - eureka-discovery-server
+
+
+  zuul-gateway:
+    image: zuul-gateway-app
+    build: micro-services/zuul-gateway/.
+    ports:
+      - 9998:9998
+    depends_on:
+      - mentor_on_demand
+      - eureka-discovery-server
+     
+    links:
+      - mentor_on_demand
+      - eureka-discovery-service
+
+
+  mod:
+    image: IIHT-app
+    build: mod/.
+    ports:
+      - 4200:80

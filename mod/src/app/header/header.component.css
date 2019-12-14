@@ -1,0 +1,10 @@
+.navbg{
+    background-color: grey;
+}
+.bottomnav{
+    position: fixed;
+	width: 100%;
+}
+.grad {
+    background-image: radial-gradient(blue, rgb(76, 12, 150), rgb(83, 158, 228));
+  }

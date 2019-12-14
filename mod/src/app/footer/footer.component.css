@@ -1,0 +1,10 @@
+.grad {
+    background-image: radial-gradient(blue, rgb(76, 12, 150), rgb(83, 158, 228));
+  }
+.bottomnav{
+    position: fixed;
+    width: 100%;
+    bottom:0%;
+
+   
+}

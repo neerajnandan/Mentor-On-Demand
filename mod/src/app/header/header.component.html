@@ -1,0 +1,25 @@
+<nav class="navbar navbar-dark navbg grad">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <h1 class="text-white py-4">
+              <i class="material-icons" style="font-size:48px;">laptop_chromebook</i>
+              Mentor On Demand</h1>
+          </div>
+          <ul class="nav  ml-auto">
+            <li *ngIf="!this.userService.getRole()">
+                <a class="nav-link text-white" routerLink="/login"><strong>Login</strong></a>
+            </li>
+            <li *ngIf="!this.userService.getRole()">
+                <a class="nav-link text-white" routerLink="/register"> <strong>Registration </strong></a>
+            <li *ngIf="this.userService.getRole()=='ROLE_M'">
+                <a class="nav-link text-white" routerLink="/addSkill"> <strong>Add Skill </strong></a>
+              </li>
+            <li *ngIf="this.userService.getRole()">
+                <a class="nav-link text-white"><strong> Hello, {{this.userService.getDisplayName()}}</strong></a>
+            </li>
+            <li *ngIf="this.userService.getRole()">
+                <a class="nav-link text-white" (click)="logout()" routerLink="/login"> <strong>Logout</strong> </a>
+            </li>
+          </ul>
+        </div>
+      </nav>

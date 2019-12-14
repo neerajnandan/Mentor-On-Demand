@@ -1,0 +1,32 @@
+/* .card-alignment {
+    background: grey;
+
+}
+.form-control {
+    width: 10in;
+} */
+
+
+
+.well
+{
+   padding: 35px;
+   padding-left: 30px;
+   box-shadow: 0 0 10px white;
+   margin: 4% auto 0;
+   width: 450px;
+   
+}
+
+body
+{
+    background-color:  #dedede;
+    text-decoration-color: black;
+    
+}
+
+.input-group-addon
+{
+    background-color: #ffde6c;
+    color: #d17d00;
+}
